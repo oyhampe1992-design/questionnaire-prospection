@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#F5F1EA" />
+<title>The Wooder — 5 minutes pour nous aider ?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F1EA;
+    --surface: #FFFFFF;
+    --surface-2: #FAF7F1;
+    --ink: #1C1917;
+    --ink-2: #44403C;
+    --ink-3: #78716C;
+    --line: #E7E2D8;
+    --line-strong: #C7BFAE;
+    --accent: #B45309;
+    --accent-hover: #92400E;
+    --accent-soft: #FED7AA;
+    --accent-ghost: #FEF3E2;
+    --success: #166534;
+    --success-soft: #DCFCE7;
+    --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.06);
+    --shadow: 0 4px 12px rgba(28, 25, 23, 0.08), 0 1px 2px rgba(28, 25, 23, 0.04);
+    --shadow-lg: 0 12px 32px rgba(28, 25, 23, 0.12), 0 4px 8px rgba(28, 25, 23, 0.06);
+    --radius: 14px;
+    --radius-sm: 10px;
+    --radius-lg: 20px;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 20% 0%, rgba(180, 83, 9, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 100%, rgba(180, 83, 9, 0.02) 0%, transparent 50%);
+  }
+
+  .app {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px 120px;
+    padding-top: calc(20px + env(safe-area-inset-top));
+  }
+
+  .header {
+    text-align: center;
+    padding: 30px 0 24px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 28px;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .brand em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .header-sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-3);
+  }
+
+  .intro {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-sm);
+  }
+  .intro h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .intro h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .intro p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin-bottom: 10px;
+  }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro strong { color: var(--ink); font-weight: 600; }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::before, .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line-strong);
+    opacity: 0.6;
+  }
+
+  .question {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s;
+  }
+  .question.answered {
+    border-color: var(--accent);
+  }
+
+  .question-num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .question-text {
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .chip {
+    padding: 7px 13px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .chip:active { transform: scale(0.96); }
+  .chip.selected {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .free-field {
+    width: 100%;
+    padding: 11px 14px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    outline: none;
+    resize: vertical;
+    min-height: 64px;
+    line-height: 1.45;
+    transition: border-color 0.15s;
+  }
+  .free-field:focus { border-color: var(--accent); }
+
+  .identity {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .identity-row {
+    margin-bottom: 12px;
+  }
+  .identity-row:last-child { margin-bottom: 0; }
+  .identity label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+  }
+  .identity input {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    outline: none;
+  }
+  .identity input:focus { border-color: var(--accent); }
+
+  .submit-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--bg) 70%, rgba(245, 241, 234, 0));
+    max-width: 680px;
+    margin: 0 auto;
+    z-index: 10;
+  }
+  .btn {
+    width: 100%;
+    padding: 14px 20px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: -0.005em;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: var(--shadow);
+  }
+  .btn-primary:active { transform: scale(0.98); background: var(--accent-hover); }
+  .btn-primary:disabled {
+    background: var(--line-strong);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  .btn-ghost {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .secondary-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .progress {
+    font-size: 12px;
+    color: var(--ink-3);
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .success {
+    background: var(--success-soft);
+    border: 1px solid var(--success);
+    color: var(--success);
+    padding: 16px 20px;
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    display: none;
+  }
+  .success.show { display: block; }
+  .success strong { font-weight: 600; }
+
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-3);
+    padding: 40px 0 20px;
+    font-family: var(--font-display);
+    font-style: italic;
+  }
+
+  .footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-style: normal;
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="header">
+    <div class="brand">The Wooder <em>— 5 min de votre temps ?</em></div>
+    <div class="header-sub">un questionnaire entre menuisiers</div>
+  </div>
+
+  <div class="intro">
+    <h1>Comprendre <em>comment vous travaillez</em>, pour construire ce qu'il vous faut</h1>
+    <p>Bonjour, je m'appelle <strong id="owner-display">Pierre</strong> et je suis menuisier, comme vous.</p>
+    <p>Dans notre métier, on a tous les mêmes deux galères : <strong>trouver des clients</strong>, et <strong>gérer la partie chiffrage + fichiers de fabrication</strong>. Je développe <strong>The Wooder</strong> — une plateforme de mise en relation entre particuliers et menuisiers, avec les outils de fabrication intégrés — configurateur 3D, fichiers de fab, débit, ferrures.</p>
+    <p>Pour être sûr de construire la bonne chose, <strong>votre avis de pro aurait beaucoup de valeur</strong>. Ce questionnaire prend environ <strong>5 minutes</strong>. À la fin, vous cliquez sur « Envoyer » et vos réponses me parviennent directement — pas besoin d'ouvrir votre client mail.</p>
+    <p style="color:var(--ink-3); font-style:italic;">Merci beaucoup pour votre temps 🙏</p>
+  </div>
+
+  <div class="section-title">Vous êtes</div>
+
+  <div class="identity">
+    <div class="identity-row">
+      <label for="id-name">Votre nom / entreprise</label>
+      <input type="text" id="id-name" placeholder="Ex : L'Atelier du Chêne — Jean Dupont" />
+    </div>
+    <div class="identity-row">
+      <label for="id-city">Votre ville</label>
+      <input type="text" id="id-city" placeholder="Ex : Biarritz" />
+    </div>
+    <div class="identity-row">
+      <label for="id-contact">Email ou téléphone (pour qu'on puisse revenir vers vous si besoin)</label>
+      <input type="text" id="id-contact" placeholder="Ex : jean@atelier-du-chene.fr" />
+    </div>
+  </div>
+
+  <div class="section-title">Votre métier au quotidien</div>
+
+  <div id="questions"></div>
+
+  <div class="section-title">En bonus</div>
+
+  <div class="question">
+    <div class="question-num">Libre</div>
+    <div class="question-text">Une remarque, une idée, une envie particulière que vous aimeriez qu'on prenne en compte ?</div>
+    <textarea class="free-field" id="final-notes" placeholder="Tout ce que vous voulez partager…" style="min-height:100px;"></textarea>
+  </div>
+
+  <div class="success" id="success-msg">
+    <strong>✓ Votre client mail s'est ouvert.</strong> Il ne vous reste plus qu'à <strong>cliquer sur Envoyer</strong> pour que vos réponses me parviennent. Merci !
+  </div>
+
+  <div class="footer">
+    The Wooder — entre menuisiers, pour des menuisiers<br>
+    <a href="https://the-wooder.com" target="_blank" rel="noopener">the-wooder.com</a>
+  </div>
+</div>
+
+<div class="submit-bar">
+  <div class="progress" id="progress-text">0 / 13 questions répondues</div>
+  <button class="btn btn-primary" id="submit-btn" onclick="submitByEmail()">
+    📧 Envoyer mes réponses par email
+  </button>
+  <div class="secondary-actions">
+    <button class="btn btn-ghost" onclick="copyAnswers()">📋 Copier le texte</button>
+    <button class="btn btn-ghost" onclick="downloadAnswers()">💾 Télécharger (.txt)</button>
+  </div>
+</div>
+
+<script>
+// =====================================================
+// CONFIGURATION — À personnaliser avant déploiement
+// =====================================================
+const CONFIG = {
+  // L'email qui recevra les réponses
+  destEmail: 'pierre@the-wooder.com',
+  ownerName: 'Pierre',
+  // Sujet du mail envoyé
+  subject: 'Nouvelle réponse au questionnaire The Wooder',
+  // Service de relais email (sans backend à héberger)
+  // Voir https://formsubmit.co — premier envoi = email de confirmation à activer
+  formEndpoint: 'https://formsubmit.co/ajax/pierre@the-wooder.com'
+};
+
+// Lire les paramètres URL pour surcharger
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('to')) {
+  CONFIG.destEmail = urlParams.get('to');
+  CONFIG.formEndpoint = 'https://formsubmit.co/ajax/' + encodeURIComponent(urlParams.get('to'));
+}
+if (urlParams.get('name')) CONFIG.ownerName = urlParams.get('name');
+document.getElementById('owner-display').textContent = CONFIG.ownerName;
+
+// =====================================================
+// QUESTIONS — mêmes que le mode écoute de l'app de démarchage
+// =====================================================
+const QUESTIONS = [
+  {
+    q: "Comment vous récupérez vos clients aujourd'hui ?",
+    options: ["Bouche-à-oreille", "Site web", "Instagram", "Architectes", "Cuisinistes", "Salons", "Google Maps", "Pages Jaunes", "Autre"],
+    type: "checklist"
+  },
+  {
+    q: "Quand un client vient avec une idée de meuble sur-mesure, vous partez de quoi pour concevoir ?",
+    options: ["Plan détaillé", "Croquis", "Simple échange", "Photo d'inspiration", "Relevés sur place", "Cahier des charges"],
+    type: "checklist"
+  },
+  {
+    q: "Sur quel logiciel dessinez-vous vos meubles ?",
+    options: ["SketchUp", "AutoCAD", "Fusion 360", "Rhino", "TopSolid", "Polyboard", "SolidWorks", "Inventor", "Cabinet Vision", "Papier/crayon", "Je ne dessine pas", "Autre"],
+    type: "checklist"
+  },
+  {
+    q: "Côté équipement, votre atelier c'est quoi ?",
+    options: ["Scie à format", "Toupie", "Raboteuse-dégau", "CNC", "Plaqueuse de chants", "Cabine vernis", "Ponceuse à bande", "Défonceuse", "Mortaiseuse", "Perceuse multibroche"],
+    type: "checklist"
+  },
+  {
+    q: "Si vous avez une CNC, c'est quelle marque ?",
+    options: ["Biesse", "SCM", "Felder", "Homag", "Weeke", "Holz-Her", "Maslow", "Shaper Origin", "Mach", "Pas de CNC", "Autre"],
+    type: "checklist"
+  },
+  {
+    q: "Votre CNC, elle lit quel type de fichiers ? Ou si vous n'en avez pas, comment vous gérez votre débit et vos perçages ?",
+    options: ["DXF", "DWG", "G-code", "WoodWOP", "Xilog", "Biesseworks", "MPR", "Alphacam", "VCarve / Aspire", "Débit manuel", "Sous-traite la découpe", "Via fablab / CNC partagée", "Autre"],
+    type: "checklist",
+    hint: "C'est vous qui post-processez, ou vous passez par un CAM ?"
+  },
+  {
+    q: "Les ferrures comme Clamex, Cabineo, excentriques, vous les choisissez comment pour un projet sur-mesure ?",
+    type: "text"
+  },
+  {
+    q: "C'est quoi votre principal casse-tête aujourd'hui ?",
+    options: ["Trouver des clients", "Chiffrage / devis", "Fichiers CNC", "Modélisation 3D", "Gestion atelier", "Relances paiement", "Tout à la fois"],
+    type: "checklist"
+  },
+  {
+    q: "Combien de meubles sur-mesure vous sortez par mois ? Vous êtes saturé ou vous avez du mou ?",
+    options: ["0-2 par mois", "3-5 par mois", "5-10 par mois", "10+ par mois", "Saturé", "Du mou"],
+    type: "checklist"
+  },
+  {
+    q: "Combien de temps ça vous prend de faire un devis pour un meuble sur-mesure ?",
+    options: ["< 30 min", "30 min - 1h", "1 - 2h", "2 - 4h", "Demi-journée", "Pas de devis écrit"],
+    type: "checklist"
+  },
+  {
+    q: "Si un client de votre secteur vous arrivait avec son devis déjà validé à vos prix, et tout ce qui est prêt pour l'atelier — feuille de débit, liste de ferrures, et fichiers de fabrication si vous avez une CNC —, ça résoudrait un vrai problème ?",
+    options: ["Oui gros problème résolu", "Oui un peu", "Indifférent", "Non, déjà fluide", "Sceptique"],
+    type: "radio"
+  },
+  {
+    q: "Et si vous pouviez utiliser ces outils (configurateur 3D, feuille de débit, listes de ferrures, et fichiers de fab si vous êtes équipé CNC) pour vos projets en direct client — indépendamment de Wooder — ça vous servirait ?",
+    options: ["Oui très utile", "Oui un peu", "Indifférent", "Non"],
+    type: "radio"
+  },
+  {
+    q: "Qu'est-ce qui vous ferait dire « oui à 100% » à un outil comme ça ? Et qu'est-ce qui vous ferait dire « jamais » ?",
+    type: "text"
+  }
+];
+
+// =====================================================
+// State & rendering
+// =====================================================
+const answers = {};
+QUESTIONS.forEach((_, i) => answers[i] = { choices: [], free: '' });
+
+function renderQuestions() {
+  const container = document.getElementById('questions');
+  container.innerHTML = QUESTIONS.map((q, i) => {
+    const hasOptions = q.options && q.options.length > 0;
+    const a = answers[i];
+    const isAnswered = (a.choices && a.choices.length) || (a.free && a.free.trim());
+    return `
+      <div class="question ${isAnswered ? 'answered' : ''}" id="q-${i}">
+        <div class="question-num">Question ${i + 1} / ${QUESTIONS.length}</div>
+        <div class="question-text">${escapeHtml(q.q)}</div>
+        ${q.hint ? `<div style="font-size:13px; color:var(--ink-3); font-style:italic; margin-bottom:10px;">${escapeHtml(q.hint)}</div>` : ''}
+        ${hasOptions ? `
+          <div class="chips">
+            ${q.options.map((opt, optIdx) => `
+              <button type="button" class="chip ${a.choices.includes(opt) ? 'selected' : ''}" onclick="toggleChoice(${i}, ${optIdx})">${escapeHtml(opt)}</button>
+            `).join('')}
+          </div>
+        ` : ''}
+        <textarea class="free-field" placeholder="${hasOptions ? 'Vos précisions ou commentaires…' : 'Votre réponse…'}" oninput="updateFree(${i}, this.value)">${escapeHtml(a.free)}</textarea>
+      </div>
+    `;
+  }).join('');
+  updateProgress();
+}
+
+function toggleChoice(qIdx, optIdx) {
+  const q = QUESTIONS[qIdx];
+  if (!q || !q.options || !q.options[optIdx]) return;
+  const opt = q.options[optIdx];
+  const type = q.type || 'checklist';
+  const a = answers[qIdx];
+  if (type === 'radio') {
+    a.choices = a.choices.includes(opt) ? [] : [opt];
+  } else {
+    const idx = a.choices.indexOf(opt);
+    if (idx >= 0) a.choices.splice(idx, 1);
+    else a.choices.push(opt);
+  }
+  renderQuestions();
+}
+
+function updateFree(i, v) {
+  answers[i].free = v;
+  updateProgress();
+  // Update answered state without re-rendering (to preserve focus)
+  const el = document.getElementById('q-' + i);
+  if (el) {
+    const a = answers[i];
+    const isAnswered = (a.choices && a.choices.length) || (a.free && a.free.trim());
+    el.classList.toggle('answered', !!isAnswered);
+  }
+}
+
+function updateProgress() {
+  const count = Object.values(answers).filter(a =>
+    (a.choices && a.choices.length) || (a.free && a.free.trim())
+  ).length;
+  document.getElementById('progress-text').textContent = `${count} / ${QUESTIONS.length} questions répondues`;
+}
+
+// =====================================================
+// Build the email body
+// =====================================================
+function buildEmailBody() {
+  const lines = [];
+  const name = document.getElementById('id-name').value.trim();
+  const city = document.getElementById('id-city').value.trim();
+  const contact = document.getElementById('id-contact').value.trim();
+  const finalNotes = document.getElementById('final-notes').value.trim();
+
+  lines.push('— Réponses au questionnaire The Wooder —');
+  lines.push('');
+  if (name) lines.push('Nom / entreprise : ' + name);
+  if (city) lines.push('Ville : ' + city);
+  if (contact) lines.push('Contact : ' + contact);
+  lines.push('');
+  lines.push('==========================================');
+  lines.push('');
+
+  QUESTIONS.forEach((q, i) => {
+    const a = answers[i];
+    const hasContent = (a.choices && a.choices.length) || (a.free && a.free.trim());
+    if (!hasContent) return;
+    lines.push((i + 1) + '. ' + q.q);
+    if (a.choices && a.choices.length) {
+      lines.push('  Réponses cochées : ' + a.choices.join(', '));
+    }
+    if (a.free && a.free.trim()) {
+      lines.push('  Précisions : ' + a.free.trim());
+    }
+    lines.push('');
+  });
+
+  if (finalNotes) {
+    lines.push('==========================================');
+    lines.push('');
+    lines.push('Remarques / idées libres :');
+    lines.push(finalNotes);
+    lines.push('');
+  }
+
+  lines.push('==========================================');
+  lines.push('');
+  lines.push('Merci !');
+  return lines.join('\n');
+}
+
+async function submitByEmail() {
+  const submitBtn = document.getElementById('submit-btn');
+  const originalLabel = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = '⏳ Envoi en cours…';
+
+  const name = document.getElementById('id-name').value.trim();
+  const city = document.getElementById('id-city').value.trim();
+  const contact = document.getElementById('id-contact').value.trim();
+  const finalNotes = document.getElementById('final-notes').value.trim();
+
+  // Validation minimale : au moins le nom ou le contact
+  if (!name && !contact) {
+    alert("Avant d'envoyer, merci de renseigner au moins votre nom / entreprise ou un moyen de vous recontacter.");
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalLabel;
+    return;
+  }
+
+  // Construction du payload
+  const formData = new FormData();
+  formData.append('_subject', CONFIG.subject + (name ? ' — ' + name : ''));
+  formData.append('_captcha', 'false'); // pas de captcha intermédiaire
+  formData.append('_template', 'table'); // joli format email
+  formData.append('_honey', ''); // honeypot anti-spam (laissé vide)
+
+  formData.append('Nom / entreprise', name || '(non renseigné)');
+  formData.append('Ville', city || '(non renseignée)');
+  formData.append('Contact', contact || '(non renseigné)');
+
+  QUESTIONS.forEach((q, i) => {
+    const a = answers[i];
+    const hasContent = (a.choices && a.choices.length) || (a.free && a.free.trim());
+    if (!hasContent) return;
+    let value = '';
+    if (a.choices && a.choices.length) value += a.choices.join(', ');
+    if (a.free && a.free.trim()) value += (value ? ' / ' : '') + a.free.trim();
+    // Tronquer label pour rester lisible dans la table du mail
+    const qLabel = `Q${i + 1}. ${q.q.length > 80 ? q.q.slice(0, 80) + '…' : q.q}`;
+    formData.append(qLabel, value);
+  });
+
+  if (finalNotes) formData.append('Remarques libres', finalNotes);
+
+  try {
+    const response = await fetch(CONFIG.formEndpoint, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const data = await response.json().catch(() => ({}));
+    if (data.success === 'false' || data.error) {
+      throw new Error(data.message || 'Envoi refusé par le serveur');
+    }
+
+    // Succès !
+    submitBtn.textContent = '✓ Envoyé — merci !';
+    submitBtn.style.background = 'var(--success)';
+    document.getElementById('success-msg').innerHTML = '<strong>✓ Vos réponses ont bien été envoyées.</strong> Merci beaucoup pour votre temps — ' + escapeHtml(CONFIG.ownerName) + ' va les lire avec attention.';
+    document.getElementById('success-msg').classList.add('show');
+    document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Scroll en haut et désactiver les interactions après succès
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 1500);
+  } catch (err) {
+    console.error('Envoi échoué:', err);
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalLabel;
+    fallbackMailto();
+  }
+}
+
+function fallbackMailto() {
+  const body = buildEmailBody();
+  const subject = encodeURIComponent(CONFIG.subject);
+  const bodyEnc = encodeURIComponent(body);
+  const mailto = `mailto:${CONFIG.destEmail}?subject=${subject}&body=${bodyEnc}`;
+
+  const proceed = confirm("L'envoi direct n'a pas fonctionné (pas de connexion ?).\n\nOK pour ouvrir votre client mail avec vos réponses pré-remplies ?\n\nSinon vous pouvez aussi copier le texte avec le bouton « Copier » à côté.");
+  if (!proceed) return;
+
+  if (mailto.length > 1800) {
+    alert("Vos réponses sont très complètes ! Le mailto est trop long — je copie tout dans votre presse-papier à la place.");
+    copyAnswers();
+    return;
+  }
+
+  window.location.href = mailto;
+  setTimeout(() => {
+    document.getElementById('success-msg').innerHTML = '<strong>✓ Votre client mail s\'est ouvert.</strong> Il ne vous reste plus qu\'à <strong>cliquer sur Envoyer</strong> pour que vos réponses me parviennent. Merci !';
+    document.getElementById('success-msg').classList.add('show');
+    document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 500);
+}
+
+async function copyAnswers() {
+  const body = buildEmailBody();
+  const fullText = `À : ${CONFIG.destEmail}\nObjet : ${CONFIG.subject}\n\n${body}`;
+  try {
+    await navigator.clipboard.writeText(fullText);
+    alert('✓ Vos réponses ont été copiées. Vous pouvez les coller dans un email à envoyer à ' + CONFIG.destEmail);
+  } catch (e) {
+    // Fallback older browsers
+    const ta = document.createElement('textarea');
+    ta.value = fullText;
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      alert('✓ Vos réponses ont été copiées. Vous pouvez les coller dans un email à envoyer à ' + CONFIG.destEmail);
+    } catch (e2) {
+      alert("Impossible de copier automatiquement. Voici le texte à envoyer à " + CONFIG.destEmail + " :\n\n" + fullText);
+    }
+    document.body.removeChild(ta);
+  }
+}
+
+function downloadAnswers() {
+  const body = buildEmailBody();
+  const blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const name = (document.getElementById('id-name').value.trim() || 'questionnaire').replace(/[^a-zA-Z0-9]/g, '_');
+  a.href = url;
+  a.download = `wooder-${name}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+renderQuestions();
+</script>
+
+</body>
+</html>
